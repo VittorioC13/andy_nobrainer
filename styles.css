@@ -135,30 +135,11 @@ body {
     position: absolute;
     width: 100%;
     height: 100%;
-    background:
-        linear-gradient(45deg, #f5f5f5 25%, transparent 25%),
-        linear-gradient(-45deg, #f5f5f5 25%, transparent 25%),
-        linear-gradient(45deg, transparent 75%, #f5f5f5 75%),
-        linear-gradient(-45deg, transparent 75%, #f5f5f5 75%),
-        #ffffff;
-    background-size: 20px 20px;
-    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    background: #ffffff;
     border: 1px solid #ffffff;
     cursor: grab;
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     user-select: none;
-    position: relative;
-}
-
-.card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(0,0,0,0.02) 0%, transparent 70%);
-    pointer-events: none;
 }
 
 .card.dragging {
@@ -318,14 +299,7 @@ body {
 }
 
 .competitor.selected {
-    background:
-        linear-gradient(45deg, #fafafa 25%, transparent 25%),
-        linear-gradient(-45deg, #fafafa 25%, transparent 25%),
-        linear-gradient(45deg, transparent 75%, #fafafa 75%),
-        linear-gradient(-45deg, transparent 75%, #fafafa 75%),
-        #ffffff;
-    background-size: 10px 10px;
-    background-position: 0 0, 0 5px, 5px -5px, -5px 0px;
+    background: #ffffff;
     color: #0a0a0a;
     border-color: #ffffff;
 }
@@ -335,8 +309,7 @@ body {
 }
 
 .next-btn {
-    background:
-        linear-gradient(180deg, #ffffff 0%, #f5f5f5 100%);
+    background: #ffffff;
     color: #0a0a0a;
     border: none;
     padding: 14px 40px;
@@ -346,7 +319,6 @@ body {
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     letter-spacing: 1px;
     text-transform: uppercase;
-    position: relative;
 }
 
 .next-btn:hover {
@@ -382,29 +354,10 @@ body {
 }
 
 .winner-card {
-    background:
-        repeating-linear-gradient(
-            90deg,
-            #ffffff,
-            #ffffff 1px,
-            #fafafa 1px,
-            #fafafa 2px
-        );
+    background: transparent;
     border: 1px solid #ffffff;
     padding: 80px 40px;
     margin-bottom: 40px;
-    position: relative;
-}
-
-.winner-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, transparent 0%, rgba(0,0,0,0.03) 50%, transparent 100%);
-    pointer-events: none;
 }
 
 .winner-name {

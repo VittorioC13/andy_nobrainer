@@ -155,35 +155,17 @@ function startTournament() {
     // Shuffle liked items
     likedItems = shuffle(likedItems);
 
-    // If 3 or fewer items, show all in one final battle
-    if (likedItems.length <= 3) {
-        tournamentRound = [likedItems];
-        currentRoundIndex = 0;
-        showScreen('tournament');
-        displayTournamentRound();
-        return;
+    // If odd number, give one item a bye
+    if (likedItems.length % 2 !== 0) {
+        const byeItem = likedItems.pop();
+        tournamentRound = [[byeItem, null]];
+    } else {
+        tournamentRound = [];
     }
 
-    // For even numbers, create normal pairs
-    if (likedItems.length % 2 === 0) {
-        tournamentRound = [];
-        for (let i = 0; i < likedItems.length; i += 2) {
-            tournamentRound.push([likedItems[i], likedItems[i + 1]]);
-        }
-    } else {
-        // For odd numbers, pair what we can and put remaining in one battle
-        tournamentRound = [];
-        const remainder = likedItems.length % 2;
-        const pairableCount = likedItems.length - remainder - 2;
-
-        // Create pairs for items that can be paired
-        for (let i = 0; i < pairableCount; i += 2) {
-            tournamentRound.push([likedItems[i], likedItems[i + 1]]);
-        }
-
-        // Put last 3 items in one battle
-        const lastThree = likedItems.slice(pairableCount);
-        tournamentRound.push(lastThree);
+    // Create matchups
+    for (let i = 0; i < likedItems.length; i += 2) {
+        tournamentRound.push([likedItems[i], likedItems[i + 1]]);
     }
 
     currentRoundIndex = 0;
@@ -200,12 +182,7 @@ function displayTournamentRound() {
 
         const title = document.createElement('div');
         title.className = 'matchup-title';
-        // If only one matchup with 3+ items, it's the final selection
-        if (tournamentRound.length === 1 && matchup.length > 2) {
-            title.textContent = 'FINAL SELECTION';
-        } else {
-            title.textContent = `Battle ${index + 1}`;
-        }
+        title.textContent = `Battle ${index + 1}`;
         matchupDiv.appendChild(title);
 
         const competitors = document.createElement('div');
@@ -256,9 +233,14 @@ function nextTournamentRound() {
     const winners = [];
 
     tournamentRound.forEach((matchup, index) => {
-        const selected = document.querySelector(`[data-matchup="${index}"].selected`);
-        if (selected) {
-            winners.push(selected.dataset.item);
+        if (matchup[1] === null) {
+            // Bye - auto advance
+            winners.push(matchup[0]);
+        } else {
+            const selected = document.querySelector(`[data-matchup="${index}"].selected`);
+            if (selected) {
+                winners.push(selected.dataset.item);
+            }
         }
     });
 
@@ -276,13 +258,11 @@ function nextTournamentRound() {
 function updateTournamentTitle() {
     const title = document.querySelector('.tournament-title');
     const remaining = tournamentRound.reduce((acc, matchup) => {
-        return acc + matchup.length;
+        return acc + (matchup[1] === null ? 1 : 2);
     }, 0);
 
     if (remaining === 2) {
         title.textContent = 'FINALS';
-    } else if (remaining === 3) {
-        title.textContent = 'FINAL THREE';
     } else {
         title.textContent = `Tournament - ${remaining} Remaining`;
     }
