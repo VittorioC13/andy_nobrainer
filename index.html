@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andy's Food Decision Maker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Home Screen -->
+    <div id="home-screen" class="screen active">
+        <h1>andy's no-brainer</h1>
+        <p class="subtitle">decide what to eat</p>
+        <div class="button-container">
+            <button class="category-btn" data-category="drinks">
+                <span>DRINK / DESSERT</span>
+            </button>
+            <button class="category-btn" data-category="food">
+                <span>FOOD</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Swipe Screen -->
+    <div id="swipe-screen" class="screen">
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+            <span class="progress-text">0/0</span>
+        </div>
+
+        <h2 class="swipe-title">Swipe to Choose</h2>
+
+        <div class="card-container">
+            <div class="card">
+                <div class="card-content">
+                    <h3 class="card-title"></h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="swipe-buttons">
+            <button class="swipe-btn nope">✕</button>
+            <button class="swipe-btn like">♥</button>
+        </div>
+
+        <div class="swipe-hint">← Nope | Like →</div>
+    </div>
+
+    <!-- Tournament Screen -->
+    <div id="tournament-screen" class="screen">
+        <h2 class="tournament-title">Tournament Time!</h2>
+        <p class="tournament-subtitle">Pick the winner of each battle</p>
+
+        <div class="bracket-container">
+            <div class="round" id="round-container"></div>
+        </div>
+
+        <div class="tournament-controls">
+            <button id="next-round-btn" class="next-btn" style="display: none;">Continue</button>
+        </div>
+    </div>
+
+    <!-- Winner Screen -->
+    <div id="winner-screen" class="screen">
+        <div class="confetti"></div>
+        <h2 class="winner-title">DECISION</h2>
+        <div class="winner-card">
+            <h1 class="winner-name"></h1>
+        </div>
+        <button id="restart-btn" class="restart-btn">Restart</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
